@@ -1,3 +1,3 @@
 # Belajar GIT 
 
-1. Aries Dimas Yudhistira
+1. Aries Dimas Yudhistira - Software Engineer
