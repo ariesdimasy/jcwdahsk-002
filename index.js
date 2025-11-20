@@ -88,7 +88,7 @@ function removeAllOdds(nums){
 console.log(removeAllOdds([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
 
 
-//exercise 5
+//exercise 5 tes
 
 const str ='hello world';
 
