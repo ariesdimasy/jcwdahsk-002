@@ -42,4 +42,47 @@ stairNumber(6);
 12
 123
 
-*/ 
+*/
+function fizzBuzz(fizz, buzz, n) {
+    for (var i = 1; i <= n; i++) {
+        if (i % fizz == 0 && i % buzz == 0) {
+            console.log(i, "fizzBuzz");
+        }
+        else if (i % buzz === 0) {
+            console.log(i, ": buzz");
+        }
+        else if (i % fizz === 0) { // 12 habis dibagi 3 ?? habis 
+            console.log(i, " : fizz");
+        }
+        else {
+            console.log(i);
+        }
+    }
+}
+fizzBuzz(3, 4, 100);
+function bmi(weight, height) {
+    var calculate = weight / Math.pow(height, 2);
+    if (calculate < 18.5) {
+        console.log("less weight");
+    }
+    else if (calculate >= 18.5 && calculate <= 24.9) {
+        console.log("ideal");
+    }
+    else if (calculate >= 30 && calculate <= 39.9) {
+        console.log("very overweight");
+    }
+}
+bmi(90, 1.7);
+function stairAdvance(height) {
+    var counter = 1;
+    for (var i = 1; i <= height; i++) {
+        var str = ""; // str = ""
+        // i = 2
+        for (var j = 1; j <= i; j++) {
+            str += (counter < 10) ? '0' + counter + " " : counter + " "; // 
+            counter++;
+        }
+        console.log(str); //
+    }
+}
+stairAdvance(8);

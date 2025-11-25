@@ -51,3 +51,58 @@ stairNumber(6)
 123
 
 */
+
+function fizzBuzz(fizz: number, buzz: number, n: number) {
+
+    for (let i = 1; i <= n; i++) {
+        if (i % fizz == 0 && i % buzz == 0) {
+            console.log(i, "fizzBuzz")
+        }
+        else if (i % buzz === 0) {
+            console.log(i, ": buzz")
+        } else if (i % fizz === 0) { // 12 habis dibagi 3 ?? habis 
+            console.log(i, " : fizz")
+        }
+        else {
+            console.log(i)
+        }
+    }
+
+}
+
+fizzBuzz(3, 4, 100)
+
+function bmi(weight: number, height: number) {
+
+    let calculate = weight / Math.pow(height, 2)
+
+    if (calculate < 18.5) {
+        console.log("less weight")
+    } else if (calculate >= 18.5 && calculate <= 24.9) {
+        console.log("ideal")
+    } else if (calculate >= 30 && calculate <= 39.9) {
+        console.log("very overweight")
+    }
+
+}
+
+bmi(90, 1.7)
+
+function stairAdvance(height: number) {
+
+    let counter = 1
+    for (let i = 1; i <= height; i++) {
+        let str = "" // str = ""
+
+        // i = 2
+        for (let j = 1; j <= i; j++) {
+
+            str += (counter < 10) ? '0' + counter + " " : counter + " " // 
+
+            counter++
+        }
+        console.log(str) //
+    }
+}
+
+stairAdvance(8)
