@@ -1,0 +1,7 @@
+function anagram(str1, str2) {
+    var arr1 = str1.split("").sort().join("");
+    var arr2 = str2.split("").sort().join("");
+    return arr1 === arr2;
+}
+console.log(anagram("anagram", "nagaram"));
+console.log(anagram("kakak", "kakat"));
