@@ -1,0 +1,50 @@
+h1{
+    font-size:40px;
+    font-weight:bold;
+    color:cadetblue;
+    text-shadow: -4px 4px 4px blue;
+}
+
+p {
+    color:brown
+}
+
+#name {
+    padding:10px;
+}
+
+.input { 
+    padding:10px
+}
+
+.bg-red{
+    background-color: steelblue;
+}
+
+.form-control { 
+    margin: 20px 0;
+}
+
+.user-data-section {
+    background:linear-gradient(blue, yellow)
+}
+
+.img-bg {
+    background:url('./image.png');
+    background-position:right top;
+}
+
+.box { 
+    width:200px;
+    height:200px;
+    background-color: coral;
+    border:1px solid black;
+    margin:10px 40px 10px 0;
+    float:left;
+    padding : 30px 0 0 50px;
+}
+
+.first-paragraph::first-letter { 
+    font-size:40px;
+    font-weight:bold;
+}

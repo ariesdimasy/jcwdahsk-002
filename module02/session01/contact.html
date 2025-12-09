@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact </title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+    <h1> Contact Form </h1>
+    <hr />
+    <a href="./index.html"> Home </a> |
+    <a href="./service.html"> Service </a> |
+    <a href="./contact.html"> Contact </a>
+    <hr />
+    <form method="post" action="./contact.html">
+        <fieldset class="user-data-section">
+            <legend> User Data </legend>
+            <div class="form-control">
+                <label for="name"> Name </label><br>
+                <input class="input bg-red" type="text" value="" placeholder="Please insert your name ..." name="name"
+                    id="name" />
+            </div>
+            <div class="form-control">
+                <label for="email"> Email </label><br>
+                <input class="input" type="email" value="" placeholder="Please insert your email ..." name="email"
+                    id="email" />
+            </div>
+
+            <div class="form-control">
+                <label for="message"> Message </label> <br>
+                <textarea class="input" name="message" id="message"></textarea>
+            </div>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend> User Address </legend>
+            <div>
+                <label for="city"> City </label><br>
+                <select name="city" id="city">
+                    <option value="">-- Please select your city --</option>
+                    <option value="jakarta"> Jakarta </option>
+                    <option value="bandung"> Bandung </option>
+                    <option value="denpasar"> Denpasar </option>
+                </select>
+            </div>
+            <div>
+                <label for="address"> Address</label>
+                <textarea name="address" id="address"></textarea>
+            </div>
+        </fieldset>
+        <div>
+            <button type="submit"> Submit </button>
+        </div>
+    </form>
+
+</body>
+
+</html>
