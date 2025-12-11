@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: cadetblue;
+            position: relative;
+
+            /* transform: translate(100px, 100px);
+            transform: rotate(45deg);
+            transform: perspective(700px) translateX(100px); */
+
+            animation-name: example;
+            animation-duration: 45s;
+            animation-iteration-count: infinite;
+
+        }
+
+        /* @keyframes example {
+            from {
+                background-color: cadetblue;
+
+            }
+
+            to {
+                background-color: crimson;
+            }
+        } */
+
+        @keyframes example {
+            0% {
+                background-color: brown;
+                left: 0;
+                top: 0;
+            }
+
+            25% {
+                background-color: chocolate;
+                left: 200px;
+                top: 0;
+            }
+
+            50% {
+                background-color: blueviolet;
+                left: 200px;
+                top: 200px;
+            }
+
+            75% {
+                background-color: coral;
+                left: 0;
+                top: 200px;
+            }
+
+            100% {
+                background-color: crimson;
+                left: 0;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+
+</html>

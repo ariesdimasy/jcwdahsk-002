@@ -17,27 +17,38 @@
 
         }
 
-        .card {
-            width: 343px;
-            height: 611px;
-            border-radius: 16px;
-
+        .container {
+            display: flex;
+            flex-direction: row;
             margin-left: auto;
             margin-right: auto;
+            width: 643px;
             margin-top: 5%;
+
+        }
+
+        .card {
+            width: 300px;
         }
 
         .card .img {
-            height: 240px;
-            background-image: url('./image.png');
-            border-radius: 16px 16px 0 0;
+            display: none;
+        }
+
+        .img-desktop {
+            width: 300px;
+            background-image: url('./desktop-perfume.png');
+            height: 380px;
+            padding: 16px 0;
+            border-radius: 16px 0 0 16px;
         }
 
         .card .desc {
-            padding: 16px 16px;
+            padding: 30px 30px;
             background-color: white;
-            height: 339px;
-            border-radius: 0 0 16px 16px;
+            height: 350px;
+            border-radius: 0 16px 16px 0;
+
         }
 
         .card .desc p.top-title {
@@ -100,23 +111,61 @@
             cursor: pointer;
 
         }
+
+        @media screen and (max-width:320px) {
+            body {
+                padding: 0 10px;
+            }
+
+            .container {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .card {
+                border-radius: 16px;
+                height: 611px;
+
+            }
+
+            .card .desc {
+                border-radius: 0 0 16px 16px;
+            }
+
+            .card .img {
+                display: block;
+                height: 240px;
+                background-image: url('./mobile-perfume.png');
+                border-radius: 16px 16px 0 0;
+            }
+
+            .img-desktop {
+                display: none;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <div class="card">
-        <div class="img"></div>
-        <div class="desc">
-            <p class='top-title'>PERFUME</p>
-            <p class="heading-title">Gabrielle Essence Eau De Parfum</p>
-            <div class="text">
-                A floral, solar and voluptuous interpretation composed by Olivier Polge, Perfumer-Creator for the House
-                of CHANEL.
+    <div class="container">
+        <div class="img-desktop"></div>
+        <div class="card">
+            <div class="img"></div>
+            <div class="desc">
+                <p class='top-title'>PERFUME</p>
+                <p class="heading-title">Gabrielle Essence Eau De Parfum</p>
+                <div class="text">
+                    A floral, solar and voluptuous interpretation composed by Olivier Polge, Perfumer-Creator for the
+                    House
+                    of CHANEL.
+                </div>
+                <div class="price">$149.99</div>
+                <button class="button">Add to Cart</button>
             </div>
-            <div class="price">$149.99</div>
-            <button class="button">Add to Cart</button>
         </div>
     </div>
+
 </body>
 
 </html>
