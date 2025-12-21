@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <h1> Hello World </h1>
+    <div>
+        <label> Name </label>
+        <input type="text" value="" name="" id="name">
+    </div>
+    <!-- <h1> Hello Dimas </h1> -->
+    <button onclick="changeText()"> Click Me </button>
+    <script>
+
+        // alert(h1[0].innerHTML)
+
+        function changeText() {
+            let h1 = document.getElementsByTagName("h1")
+            let name = document.getElementById("name")
+
+            h1[0].innerHTML = "Hello " + name.value
+            alert("hello " + name.value)
+        }
+    </script>
+</body>
+
+</html>

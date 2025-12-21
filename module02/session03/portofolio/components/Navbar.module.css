@@ -1,0 +1,27 @@
+.navbar {
+    background-color: whitesmoke;
+    height: 80px;
+    line-height: 80px;
+    text-decoration: none;
+    width: 100%;
+}
+
+.navbar ul {
+ 
+    display: flex;
+    width: 80%;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar ul li {
+    list-style-type: none;
+    margin:0 20px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+    
+}
