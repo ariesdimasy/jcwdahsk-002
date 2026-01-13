@@ -1,0 +1,11 @@
+.App {
+    background-color: #FAFAFA;
+    height: 100vh;
+}
+
+.container {
+    max-width: 700px;
+    margin: -250px auto 0 auto;
+
+    height: 300px;
+}
