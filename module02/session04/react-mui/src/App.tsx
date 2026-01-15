@@ -1,16 +1,36 @@
-
+import { useState } from "react"
 import './App.css'
 import Header from './components/Header'
 import { TextField, InputAdornment, Checkbox, List, ListItem, ListItemButton, ListItemText, ListItemIcon } from '@mui/material'
+import MyListItemButton from "./components/MyListItemButton";
 
 
 function App() {
 
-  const todoList = [
+
+  const [todoList,setTodoList] = useState([
     { id: 1, text: 'Do the homework , build a web project' },
     { id: 2, text: 'Build a mobile app' },
     { id: 3, text: 'Hidup Indonesia' },
-  ];
+  ]);
+
+  const addTodoList = (text:string) => {
+
+    const lastId = todoList.length > 0 ? todoList[todoList.length - 1].id : 1;
+    // const newArr = [...todoList, { id: lastId + 1, text }];
+    const newArr = todoList.concat({ id: lastId + 1, text });
+    setTodoList(newArr);
+  }
+
+  const updateTodoList = (id:number, text:string) => {
+    const newArr = todoList.map(item => {
+      if (item.id === id) { 
+        return { ...item, text };
+      }
+      return item;
+    });
+    setTodoList(newArr)
+  }
 
   return (
     <div className='App'>
@@ -22,6 +42,19 @@ function App() {
         label="Outlined"
         variant="outlined"
         style={{ width: '100%', backgroundColor:'white', borderRadius:8 }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            const target = e.target as HTMLInputElement;
+            const text = target.value;
+            if (text.trim() !== '') {
+              addTodoList(text);
+              target.value = '';
+            }
+          }
+        }}
+        onClick={(e) => {
+
+        }}
         slotProps={{
           input: {
             startAdornment: (
@@ -40,12 +73,7 @@ function App() {
         />
         <List sx={{ mt: "20px", borderRadius: '10px',  }}>
           { todoList.map((item, index) => (<ListItem key={index} sx={{ backgroundColor: 'white' }} disablePadding>
-             <ListItemButton>
-              <ListItemIcon>
-               <Checkbox  slotProps={{ input: { 'aria-label': 'Checkbox demo' } }} name="checked" value="done" />
-              </ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton> 
+            <MyListItemButton item={item} updateTodoList={updateTodoList} />
           </ListItem>))}
           <ListItem sx={{ backgroundColor: 'white', height:50, padding: '0 30px' }} disablePadding>
             
