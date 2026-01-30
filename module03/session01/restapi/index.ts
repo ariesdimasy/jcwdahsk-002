@@ -17,9 +17,12 @@ app.get("/api", async (req: Request, res: Response) => {
     })
 })
 
+// router handler , 
+// code endpoint /api/todos
 app.get("/api/todos", async (req: Request, res: Response) => {
+    // membaca file 
     const jsonFile = await fs.readFile("./todos.json", 'utf-8')
-    const todosData = JSON.parse(jsonFile)
+    const todosData = JSON.parse(jsonFile) // object di js atau array 
 
     res.status(200).send({
         "message": "fetch todos success",
@@ -27,11 +30,16 @@ app.get("/api/todos", async (req: Request, res: Response) => {
     })
 })
 
-app.get("/api/todos/:id", async (req: Request, res: Response) => {
-    const { id } = req.params
-    const jsonFile = await fs.readFile("./todos.json", 'utf-8')
-    const todosData = JSON.parse(jsonFile)
 
+// router detail todos 
+// :id ini adalah dynamic parameter 
+app.get("/api/todos/:id", async (req: Request, res: Response) => {
+    const { id } = req.params // params 
+    // baca todos.json
+    const jsonFile = await fs.readFile("./todos.json", 'utf-8')
+    const todosData = JSON.parse(jsonFile) // convert ke object 
+
+    // pencarian todos yang id nya sekian
     const detail = todosData.todos.find((todo: {
         id: number, title: string, done: boolean
     }) => {
@@ -50,19 +58,22 @@ app.get("/api/todos/:id", async (req: Request, res: Response) => {
     })
 })
 
+// router handler untuk add todos 
 app.post("/api/todos", async (req: Request, res: Response) => {
 
     const jsonFile = await fs.readFile("./todos.json", 'utf-8')
-    const todosData = JSON.parse(jsonFile)
+    const todosData = JSON.parse(jsonFile) // array of object
 
     const { title, done } = req.body
 
     todosData.todos.push({
-        id: todosData.todos[todosData.todos.length - 1].id + 1,
+        id: todosData.todos[todosData.todos.length - 1].id + 1, // 2 + 1
         title,
         done
     })
 
+
+    // menulis ulang keseluruhan file json nya
     const writeJson = await fs.writeFile("./todos.json", JSON.stringify({
         "todos": todosData.todos
     }))
