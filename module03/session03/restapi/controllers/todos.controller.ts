@@ -1,4 +1,4 @@
-import { type Request, type Response } from "express"
+import { type Request, type Response } from "express" // dari node_modules
 import pool from "../config/db.js"
 
 export async function getAllTodos(req: Request, res: Response) {
