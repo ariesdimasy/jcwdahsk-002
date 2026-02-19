@@ -12,15 +12,26 @@ export async function getAllTodos(req: Request, res: Response) {
     })
 }
 
+// handler , function 
+// digunakan untuk logic, service untuk router 
+// 1 router , 1 handler
+// itu berupa function , yang mana function tersebut harus mengandung 2 atau 3 parameter 
+// req => mendapatkan input dari user 
+// post => req.body 
+// get => query => req.query , 
+// params => req.params
+// router.post
 export async function getTodoDetail(req: Request, res: Response) {
     const { id } = req.params // params 
 
     const result = await pool.query("SELECT * from todos where id = $1", [id])
     const todo = result.rows
 
+    // chaining method , res ini object dari class Res
+    // status method dan method send 
     return res.status(200).send({
         "message": "fetch todos success",
-        data: todo[0]
+        data: todo[0],
     })
 }
 
