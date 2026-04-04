@@ -1,0 +1,33 @@
+{
+  "name": "express-exercise-api",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/index.js",
+    "dev": "ts-node index.ts",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@prisma/adapter-pg": "^7.4.0",
+    "@prisma/client": "^7.4.0",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.3.0",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "pg": "^8.18.0",
+    "prisma": "^7.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@openrouter/ai-sdk-provider": "^2.3.3",
+    "@types/cors": "^2.8.19",
+    "ai": "^6.0.143",
+    "cors": "^2.8.6"
+  }
+}
