@@ -53,7 +53,7 @@ export async function register(req: Request, res: Response) {
     } catch (err) {
         // internal server error
         // sql error
-        console.log(err.message)
+
         if (err instanceof z.ZodError) {
             for (const item of err.issues) {
                 console.log(item.message)
