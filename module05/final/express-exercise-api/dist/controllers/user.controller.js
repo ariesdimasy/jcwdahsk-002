@@ -7,7 +7,7 @@ import { loginSchema, registerSchema, z } from "../services/validation.schema.se
 import cloudinary from "../services/cloudinary.service.js";
 import fs from "fs";
 import transporter from "../config/nodemailer.js";
-export async function register(req, res) {
+export async function register(req, res, next) {
     try {
         const { name, email, password } = req.body;
         registerSchema.parse({ name, email, password });
@@ -40,18 +40,10 @@ export async function register(req, res) {
         res.status(201).json({ message: "User registered successfully" });
     }
     catch (err) {
-        // internal server error
-        // sql error
-        console.log(err.message);
-        if (err instanceof z.ZodError) {
-            for (const item of err.issues) {
-                console.log(item.message);
-            }
-        }
-        res.status(500).json({ error: "Failed to register user" });
+        next(err);
     }
 }
-export async function login(req, res) {
+export async function login(req, res, next) {
     try {
         const { email, password } = req.body;
         loginSchema.parse({ email, password });
@@ -86,12 +78,7 @@ export async function login(req, res) {
         });
     }
     catch (err) {
-        if (err instanceof z.ZodError) {
-            for (const item of err.issues) {
-                console.log(item.message);
-            }
-        }
-        res.status(500).json({ error: "Failed to login" });
+        next(err);
     }
 }
 export async function refreshToken(req, res) {
@@ -111,7 +98,7 @@ export async function refreshToken(req, res) {
         res.status(403).json({ error: "Invalid or expired token" });
     }
 }
-export async function googleLogin(req, res) {
+export async function googleLogin(req, res, next) {
     try {
         const { idToken } = req.body;
         const googleUser = await verifyGoogleToken(idToken);
@@ -132,10 +119,10 @@ export async function googleLogin(req, res) {
         });
     }
     catch (err) {
-        res.status(500).json({ error: "Failed to login with Google" });
+        next(err);
     }
 }
-export async function uploadAvatar(req, res) {
+export async function uploadAvatar(req, res, next) {
     try {
         const file = req.file;
         const userId = parseInt(req.params['userId'] ?? '0');
@@ -154,12 +141,11 @@ export async function uploadAvatar(req, res) {
         });
         res.status(200).json({ message: "Avatar uploaded successfully", avatarUrl: result.secure_url });
     }
-    catch (error) {
-        console.log(error);
-        res.status(500).json({ error: "Failed to upload avatar" });
+    catch (err) {
+        next(err);
     }
 }
-export async function getProfile(req, res) {
+export async function getProfile(req, res, next) {
     try {
         const userId = parseInt(req.params['userId'] ?? '0');
         const user = await prisma.user.findUnique({
@@ -169,11 +155,11 @@ export async function getProfile(req, res) {
             return res.status(404).json({ error: "User not found" });
         res.status(200).json({ data: user });
     }
-    catch (error) {
-        res.status(500).json({ error: "Failed to get profile" });
+    catch (err) {
+        next(err);
     }
 }
-export async function updateProfile(req, res) {
+export async function updateProfile(req, res, next) {
     try {
         const userId = parseInt(req.params['userId'] ?? '0');
         const { name, email } = req.body;
@@ -183,8 +169,8 @@ export async function updateProfile(req, res) {
         });
         res.status(200).json({ message: "Profile updated successfully", data: user });
     }
-    catch (error) {
-        res.status(500).json({ error: "Failed to update profile" });
+    catch (err) {
+        next(err);
     }
 }
 //# sourceMappingURL=user.controller.js.map

@@ -1,0 +1,34 @@
+2026-04-21 20:54:16 [error]: [ZodError] : [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "email",
+    "pattern": "/^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$/",
+    "path": [
+      "email"
+    ],
+    "message": "Invalid email address"
+  }
+]
+ZodError: [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "email",
+    "pattern": "/^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$/",
+    "path": [
+      "email"
+    ],
+    "message": "Invalid email address"
+  }
+]
+    at register (file:///I:/PURWADHIKA/jcwdahsk-002/module05/final/express-exercise-api/dist/controllers/user.controller.js:13:24)
+    at Layer.handleRequest (I:\PURWADHIKA\jcwdahsk-002\module05\final\express-exercise-api\node_modules\router\lib\layer.js:152:17)
+    at next (I:\PURWADHIKA\jcwdahsk-002\module05\final\express-exercise-api\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (I:\PURWADHIKA\jcwdahsk-002\module05\final\express-exercise-api\node_modules\router\lib\route.js:117:3)
+    at handle (I:\PURWADHIKA\jcwdahsk-002\module05\final\express-exercise-api\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (I:\PURWADHIKA\jcwdahsk-002\module05\final\express-exercise-api\node_modules\router\lib\layer.js:152:17)
+    at I:\PURWADHIKA\jcwdahsk-002\module05\final\express-exercise-api\node_modules\router\index.js:295:15
+    at processParams (I:\PURWADHIKA\jcwdahsk-002\module05\final\express-exercise-api\node_modules\router\index.js:582:12)
+    at next (I:\PURWADHIKA\jcwdahsk-002\module05\final\express-exercise-api\node_modules\router\index.js:291:5)
+    at router.handle (I:\PURWADHIKA\jcwdahsk-002\module05\final\express-exercise-api\node_modules\router\index.js:186:3)

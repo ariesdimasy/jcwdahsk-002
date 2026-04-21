@@ -1,8 +1,8 @@
-import { type Request, type Response } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 import prisma from "../config/prisma.js";
 
 
-export async function createArticle(req: Request, res: Response) {
+export async function createArticle(req: Request, res: Response, next: NextFunction) {
     try {
         const { title, content, userId } = req.body
 
@@ -42,11 +42,11 @@ export async function createArticle(req: Request, res: Response) {
         res.status(201).json({ message: "Article created successfully", article });
 
     } catch (err) {
-        res.status(500).json({ error: "Failed to create article" });
+        next(err)
     }
 }
 
-export async function getAllArticles(req: Request, res: Response) {
+export async function getAllArticles(req: Request, res: Response, next: NextFunction) {
     try {
 
         const { keyword } = req.query
@@ -78,11 +78,11 @@ export async function getAllArticles(req: Request, res: Response) {
 
         res.status(200).json({ message: "Articles retrieved successfully", articles });
     } catch (err) {
-        res.status(500).json({ error: "Failed to retrieve articles" });
+        next(err)
     }
 }
 
-export async function getArticleById(req: Request, res: Response) {
+export async function getArticleById(req: Request, res: Response, next: NextFunction) {
     try {
         const { id } = req.params // namanya id karena sudah didefinisikan di route sebagai :id
 
@@ -105,11 +105,11 @@ export async function getArticleById(req: Request, res: Response) {
 
         res.status(200).json({ message: "Article retrieved successfully", article });
     } catch (err) {
-        res.status(500).json({ error: "Failed to retrieve article" });
+        next(err)
     }
 }
 
-export async function deleteArticle(req: Request, res: Response) {
+export async function deleteArticle(req: Request, res: Response, next: NextFunction) {
     try {
         const { id } = req.params
 
@@ -129,6 +129,6 @@ export async function deleteArticle(req: Request, res: Response) {
         res.status(200).json({ message: "Article deleted successfully" });
 
     } catch (err) {
-        res.status(500).json({ error: "Failed to delete article" });
+        next(err)
     }
 }

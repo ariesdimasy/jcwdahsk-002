@@ -1,4 +1,4 @@
-import { type Request, type Response } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 import prisma from "../config/prisma.js";
 import { comparePassword, hashPassword, generateToken, verifyToken } from "../services/jwt.service.js";
 import { verifyGoogleToken } from "../services/googleAuth.service.js"
@@ -8,7 +8,7 @@ import cloudinary from "../services/cloudinary.service.js";
 import fs from "fs";
 import transporter from "../config/nodemailer.js";
 
-export async function register(req: Request, res: Response) {
+export async function register(req: Request, res: Response, next: NextFunction) {
     try {
 
         const { name, email, password } = req.body
@@ -51,19 +51,11 @@ export async function register(req: Request, res: Response) {
 
 
     } catch (err) {
-        // internal server error
-        // sql error
-
-        if (err instanceof z.ZodError) {
-            for (const item of err.issues) {
-                console.log(item.message)
-            }
-        }
-        res.status(500).json({ error: "Failed to register user" });
+        next(err)
     }
 }
 
-export async function login(req: Request, res: Response) {
+export async function login(req: Request, res: Response, next: NextFunction) {
     try {
 
         const { email, password } = req.body
@@ -106,12 +98,7 @@ export async function login(req: Request, res: Response) {
         });
 
     } catch (err) {
-        if (err instanceof z.ZodError) {
-            for (const item of err.issues) {
-                console.log(item.message)
-            }
-        }
-        res.status(500).json({ error: "Failed to login" });
+        next(err)
     }
 }
 
@@ -135,7 +122,7 @@ export async function refreshToken(req: Request, res: Response) {
     }
 }
 
-export async function googleLogin(req: Request, res: Response) {
+export async function googleLogin(req: Request, res: Response, next: NextFunction) {
     try {
         const { idToken } = req.body
         const googleUser = await verifyGoogleToken(idToken)
@@ -156,14 +143,14 @@ export async function googleLogin(req: Request, res: Response) {
             })
         })
     } catch (err) {
-        res.status(500).json({ error: "Failed to login with Google" })
+        next(err)
     }
 }
 
-export async function uploadAvatar(req: Request, res: Response) {
+export async function uploadAvatar(req: Request, res: Response, next: NextFunction) {
     try {
         const file = req.file
-        const userId = parseInt(req.params['userId'] ?? '0')
+        const userId = parseInt((req.params['userId'] as string) ?? '0')
 
         if (!file) {
             return res.status(400).json({ error: "No file uploaded" })
@@ -183,29 +170,28 @@ export async function uploadAvatar(req: Request, res: Response) {
         })
 
         res.status(200).json({ message: "Avatar uploaded successfully", avatarUrl: result.secure_url })
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({ error: "Failed to upload avatar" })
+    } catch (err) {
+        next(err)
     }
 }
 
-export async function getProfile(req: Request, res: Response) {
+export async function getProfile(req: Request, res: Response, next: NextFunction) {
     try {
-        const userId = parseInt(req.params['userId'] ?? '0')
+        const userId = parseInt((req.params['userId'] as string) ?? '0')
         const user = await prisma.user.findUnique({
             where: { id: userId },
 
         })
         if (!user) return res.status(404).json({ error: "User not found" })
         res.status(200).json({ data: user })
-    } catch (error) {
-        res.status(500).json({ error: "Failed to get profile" })
+    } catch (err) {
+        next(err)
     }
 }
 
-export async function updateProfile(req: Request, res: Response) {
+export async function updateProfile(req: Request, res: Response, next: NextFunction) {
     try {
-        const userId = parseInt(req.params['userId'] ?? '0')
+        const userId = parseInt((req.params['userId'] as string) ?? '0')
         const { name, email } = req.body
         const user = await prisma.user.update({
             where: { id: userId },
@@ -213,7 +199,7 @@ export async function updateProfile(req: Request, res: Response) {
 
         })
         res.status(200).json({ message: "Profile updated successfully", data: user })
-    } catch (error) {
-        res.status(500).json({ error: "Failed to update profile" })
+    } catch (err) {
+        next(err)
     }
 }

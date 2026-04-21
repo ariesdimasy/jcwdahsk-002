@@ -1,6 +1,6 @@
 import {} from "express";
 import prisma from "../config/prisma.js";
-export async function createArticle(req, res) {
+export async function createArticle(req, res, next) {
     try {
         const { title, content, userId } = req.body;
         const user = await prisma.user.findUnique({
@@ -34,10 +34,10 @@ export async function createArticle(req, res) {
         res.status(201).json({ message: "Article created successfully", article });
     }
     catch (err) {
-        res.status(500).json({ error: "Failed to create article" });
+        next(err);
     }
 }
-export async function getAllArticles(req, res) {
+export async function getAllArticles(req, res, next) {
     try {
         const { keyword } = req.query;
         let whereClause = {};
@@ -63,10 +63,10 @@ export async function getAllArticles(req, res) {
         res.status(200).json({ message: "Articles retrieved successfully", articles });
     }
     catch (err) {
-        res.status(500).json({ error: "Failed to retrieve articles" });
+        next(err);
     }
 }
-export async function getArticleById(req, res) {
+export async function getArticleById(req, res, next) {
     try {
         const { id } = req.params; // namanya id karena sudah didefinisikan di route sebagai :id
         const article = await prisma.article.findUnique({
@@ -87,10 +87,10 @@ export async function getArticleById(req, res) {
         res.status(200).json({ message: "Article retrieved successfully", article });
     }
     catch (err) {
-        res.status(500).json({ error: "Failed to retrieve article" });
+        next(err);
     }
 }
-export async function deleteArticle(req, res) {
+export async function deleteArticle(req, res, next) {
     try {
         const { id } = req.params;
         // check article by id
@@ -106,7 +106,7 @@ export async function deleteArticle(req, res) {
         res.status(200).json({ message: "Article deleted successfully" });
     }
     catch (err) {
-        res.status(500).json({ error: "Failed to delete article" });
+        next(err);
     }
 }
 //# sourceMappingURL=article.controller.js.map
