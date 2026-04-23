@@ -2,6 +2,8 @@ import express from "express"
 import cors from "cors"
 import 'dotenv/config'
 import { redis } from "./services/redis.service.js"
+import { scheduleTask } from "./cron/jobs/scheduleTask.js"
+import exampleQueue from "./queues/queueManager.js"
 
 import userRouter from "./routers/user.router.js"
 import articleRouter from "./routers/article.router.js"
@@ -44,10 +46,20 @@ app.get("/data", async (req, res) => {
 app.use("/api/articles", articleRouter)
 app.use("/api/users", userRouter)
 
+app.get("/enqueue", async (req, res) => {
+    await exampleQueue.add('exampleJob', {
+        data: "some data"
+    })
+    res.send("Job enqueued")
+})
 
 app.get("/", (req, res) => {
     res.send("Hello World!")
 })
+
+scheduleTask()
+
+
 
 // ⚠️ Error handler HARUS dipasang paling bawah, setelah semua routes
 app.use(errorHandler)
